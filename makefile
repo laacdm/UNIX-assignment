@@ -1,6 +1,3 @@
-EPOCH_SECONDS = $(shell date +%s)
-SH_FILES      = $(wildcard bin/*.sh)
-
 README.md:
 	touch README.md
 	echo "- Guessing Game" > README.md
