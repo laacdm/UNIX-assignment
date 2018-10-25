@@ -1,30 +1,32 @@
 #!/usr/bin/env bash
 # File: guessinggame.sh
 
-function guessinggame {
+echo "Welcome to the game of guessing the number of files in this directory."
 
-shopt -s nullglob
-numfiles=(*)
-numfiles=${#numfiles[@]}
-
-echo "Enter a natural number to guess how many files are in this directory?"
-read response
-
-
-	while [[ $response -ne $numfiles ]]
-	do
-		
-		if [[ $response -gt $numfiles ]]
-		then 
-			echo "Your guess was too high."			
-			echo "Enter a natural number to guess how many files are in this directory?"
-        		read response
-		else
-			echo "your guess was too low."
-			echo "Enter a natural number to guess how many files are in this directory?"
-                        read response
-		fi
-	done
-
-echo "Congratulations your guess is correct"  
+function question {
+	numfiles=$(ls -1| wc -l)
+	echo "How many files does this directory has?"
+	read response
 }
+
+question
+
+while [[ $response -ne $numfiles ]]
+do
+
+	if [[ $response -gt $numfiles ]]
+	then
+ 
+		echo "Your guess is too high."
+		echo "Make a lower guess."			
+	else
+		echo "Your guess is too low."
+		echo "Make a higher guess."
+	fi
+
+question
+done
+
+echo "Congratulations your guess is correct, there are:"  
+echo $numfiles "files in this directory."
+echo ""
